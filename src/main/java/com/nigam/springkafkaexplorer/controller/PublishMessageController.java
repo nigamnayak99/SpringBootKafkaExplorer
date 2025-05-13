@@ -23,7 +23,10 @@ public class PublishMessageController {
 
     @PostMapping("/{message}")
     public ResponseEntity<String> publishMessage(@PathVariable String message) {
-        kafkaTemplate.send(defaultTopic, message);
+        for(int i = 0; i < 1000; i++) {
+            //key defines the partition number, if a specific message needs to be in serial, make sure they are put into same partition
+            kafkaTemplate.send(defaultTopic, String.valueOf(i%2),message+ " "+ i);
+        }
         return ResponseEntity.ok(message);
     }
 }

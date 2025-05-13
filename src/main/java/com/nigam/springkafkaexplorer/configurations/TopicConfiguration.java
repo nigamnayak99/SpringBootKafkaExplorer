@@ -31,9 +31,8 @@ public class TopicConfiguration {
 //        return new NewTopic(defaultTopic, 3, (short)1);
 
         return TopicBuilder.name(defaultTopic)
-                .partitions(3)
+                .partitions(2)
                 .replicas(1) // Default should be one as we have only on broker in local
-                .compact()
                 .build();
     }
 }

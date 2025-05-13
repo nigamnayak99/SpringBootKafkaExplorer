@@ -10,8 +10,18 @@ import org.springframework.stereotype.Service;
 public class EventConsumer {
 
     @KafkaListener(topics = "${spring.kafka.producer.topic.default}", groupId = "${spring.kafka.consumer.group-id.default}")
-    public void consumeMessage(String message) {
-        log.info("Message Received: {}", message);
+    public void consumeMessage1(String message) {
+        log.info("Message Received consumer-1: {}", message);
     }
+
+    @KafkaListener(topics = "${spring.kafka.producer.topic.default}", groupId = "${spring.kafka.consumer.group-id.default}")
+    public void consumeMessage2(String message) {
+        log.info("Message Received consumer-2: {}", message);
+    }
+
+//    @KafkaListener(topics = "${spring.kafka.producer.topic.default}", groupId = "${spring.kafka.consumer.group-id.default}")
+//    public void consumeMessage3(String message) {
+//        log.info("Message Received consumer-3: {}", message);
+//    }
 
 }
