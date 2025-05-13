@@ -2,6 +2,7 @@ package com.nigam.springkafkaexplorer.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,11 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/publish-message")
 public class PublishMessageController {
 
+    @Value("${topic.default}")
+    private String defaultTopic;
+
     private final KafkaTemplate<String, String> kafkaTemplate;
 
     @PostMapping("/{message}")
     public ResponseEntity<String> publishMessage(@PathVariable String message) {
-        kafkaTemplate.send("ide-quickstart-events", message);
+        kafkaTemplate.send(defaultTopic, message);
         return ResponseEntity.ok(message);
     }
 }
