@@ -18,9 +18,12 @@ spring:
     password: root
   kafka:
     bootstrap-servers: localhost:9092
-
-topic:
-  default: ide-quickstart-events
+    producer:
+      topic:
+        default: ide-quickstart-events
+    consumer:
+      group-id:
+        default: quickstart-event-consumer
 
 
 

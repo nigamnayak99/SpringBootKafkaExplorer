@@ -14,7 +14,7 @@ import java.util.Map;
 @Configuration
 public class TopicConfiguration {
 
-    @Value("${topic.default}")
+    @Value("${spring.kafka.producer.topic.default}")
     private String defaultTopic;
 
     //This is a non-mandatory step

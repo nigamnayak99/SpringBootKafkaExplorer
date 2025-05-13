@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/publish-message")
 public class PublishMessageController {
 
-    @Value("${topic.default}")
+    @Value("${spring.kafka.producer.topic.default}")
     private String defaultTopic;
 
     private final KafkaTemplate<String, String> kafkaTemplate;
