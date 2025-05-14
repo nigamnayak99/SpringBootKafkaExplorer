@@ -1,5 +1,6 @@
 package com.nigam.springkafkaexplorer.service;
 
+import com.nigam.springkafkaexplorer.dto.UserDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -23,5 +24,11 @@ public class EventConsumer {
 //    public void consumeMessage3(String message) {
 //        log.info("Message Received consumer-3: {}", message);
 //    }
+
+
+    @KafkaListener(topics = "${spring.kafka.producer.topic.user-creation}", groupId = "${spring.kafka.consumer.group-id.user-creation}")
+    public void consumeUserCreationEvent(UserDTO userDTO) {
+        log.info("Message Received consumer-2: {}", userDTO);
+    }
 
 }

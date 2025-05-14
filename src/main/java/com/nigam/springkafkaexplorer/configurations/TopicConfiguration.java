@@ -17,6 +17,9 @@ public class TopicConfiguration {
     @Value("${spring.kafka.producer.topic.default}")
     private String defaultTopic;
 
+    @Value("${spring.kafka.producer.topic.user-creation}")
+    private String userCreationTopic;
+
     //This is a non-mandatory step
     @Bean
     public KafkaAdmin admin() {
@@ -31,6 +34,14 @@ public class TopicConfiguration {
 //        return new NewTopic(defaultTopic, 3, (short)1);
 
         return TopicBuilder.name(defaultTopic)
+                .partitions(2)
+                .replicas(1) // Default should be one as we have only on broker in local
+                .build();
+    }
+
+    @Bean
+    public NewTopic createNewUserCreationTopic() {
+        return TopicBuilder.name(userCreationTopic)
                 .partitions(2)
                 .replicas(1) // Default should be one as we have only on broker in local
                 .build();

@@ -19,13 +19,13 @@ public class PublishMessageController {
     @Value("${spring.kafka.producer.topic.default}")
     private String defaultTopic;
 
-    private final KafkaTemplate<String, String> kafkaTemplate;
+//    private final KafkaTemplate<String, String> kafkaTemplate;
 
     @PostMapping("/{message}")
     public ResponseEntity<String> publishMessage(@PathVariable String message) {
         for(int i = 0; i < 1000; i++) {
             //key defines the partition number, if a specific message needs to be in serial, make sure they are put into same partition
-            kafkaTemplate.send(defaultTopic, String.valueOf(i%2),message+ " "+ i);
+            //kafkaTemplate.send(defaultTopic, String.valueOf(i%2),message+ " "+ i);
         }
         return ResponseEntity.ok(message);
     }

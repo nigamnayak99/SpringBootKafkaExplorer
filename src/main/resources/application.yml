@@ -17,13 +17,27 @@ spring:
     username: postgres
     password: root
   kafka:
-    bootstrap-servers: localhost:9092
+#    bootstrap-servers: localhost:9092
     producer:
+#      key-serializer: org.apache.kafka.common.serialization.LongSerializer
+#      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       topic:
         default: qs-topic
+        user-creation: user-creation
+      acks: all
+      retries: 3
     consumer:
       group-id:
         default: qs-topic-consumer
+        user-creation: user-creation
+#      key-deserializer: org.apache.kafka.common.serialization.LongDeserializer
+#      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      max-poll-records: 100
+#      properties:
+#        spring.json:
+#          trusted.packages: com.nigam.springkafkaexplorer.*
 
 
 
